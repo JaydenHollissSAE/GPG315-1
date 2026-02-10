@@ -57,7 +57,7 @@ public class ObjectRandomiser : EditorWindow
 
         DisplayList("randomMaterialsList");
 
-        if (GUILayout.Button("Randomise Materials"))
+        if (GUILayout.Button("Randomise!"))
         {
             if (Selection.objects.Length > 0)
             {
@@ -89,7 +89,7 @@ public class ObjectRandomiser : EditorWindow
     {
         DisplayList("randomMeshList");
 
-        if (GUILayout.Button("Randomise Mesh"))
+        if (GUILayout.Button("Randomise!"))
         {
             if (Selection.objects.Length > 0)
             {
