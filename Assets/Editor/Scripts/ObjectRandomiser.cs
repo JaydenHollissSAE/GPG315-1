@@ -95,15 +95,15 @@ public class ObjectRandomiser : EditorWindow
                         List<int> checkedIndexes = new List<int>();
                         while (true)
                         {
-                            if (checkedIndexes.Count >= randomMeshList.Length)
+                            if (checkedIndexes.Count >= randomMaterialsList.Length)
                             {
                                 Debug.LogError("No valid materials found in list.");
                                 break;
                             }
-                            int materialIndex = Random.Range(0, randomMeshList.Length);
+                            int materialIndex = Random.Range(0, randomMaterialsList.Length);
                             checkedIndexes.Add(materialIndex);
                             Material newMaterial = randomMaterialsList[materialIndex];
-                            if (material != null)
+                            if (newMaterial != null)
                             {
                                 material.material = newMaterial;
                                 break;
