@@ -66,7 +66,25 @@ public class ObjectRandomiser : EditorWindow
                     Renderer material = thisobj.GetComponent<Renderer>();
                     if (material != null)
                     {
-                        material.material = randomMaterialsList[Random.Range(0, randomMaterialsList.Length)];
+                        List<int> checkedIndexes = new List<int>();
+                        while (true)
+                        {
+                            if (checkedIndexes.Count >= randomMeshList.Length)
+                            {
+                                Debug.LogError("No valid meshes found in list.");
+                                break;
+                            }
+                            int materialIndex = Random.Range(0, randomMeshList.Length);
+                            checkedIndexes.Add(materialIndex);
+                            Material newMaterial = randomMaterialsList[materialIndex];
+                            if (material != null)
+                            {
+                                material.material = newMaterial;
+                                break;
+                            }
+                            else Debug.LogError("Mesh at index [" + materialIndex + "] is empty.");
+
+                        }
                     }
                     else
                     {
@@ -98,7 +116,25 @@ public class ObjectRandomiser : EditorWindow
                     MeshFilter mesh = thisobj.GetComponent<MeshFilter>();
                     if (mesh != null)
                     {
-                        mesh.mesh = randomMeshList[Random.Range(0, randomMeshList.Length)];
+                        List<int> checkedIndexes = new List<int>();
+                        while (true)
+                        {
+                            if (checkedIndexes.Count >= randomMeshList.Length)
+                            {
+                                Debug.LogError("No valid meshes found in list.");
+                                break;
+                            }
+                            int meshIndex = Random.Range(0, randomMeshList.Length);
+                            checkedIndexes.Add(meshIndex);
+                            Mesh newMesh = randomMeshList[meshIndex];
+                            if (mesh != null)
+                            {
+                                mesh.mesh = newMesh;
+                                break;
+                            }
+                            else Debug.LogError("Mesh at index [" + meshIndex + "] is empty.");
+
+                        }
                     }
                     else
                     {
