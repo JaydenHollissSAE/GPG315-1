@@ -32,7 +32,7 @@ public class ObjectRandomiser : EditorWindow
 
     void OnGUI()
     {
-        scrollBar = GUILayout.BeginScrollView(scrollBar);
+        //scrollBar = GUILayout.BeginScrollView(scrollBar);
 
         if (showRandomiseMaterials) 
         {
