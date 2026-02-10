@@ -121,10 +121,10 @@ public class ObjectRandomiser : EditorWindow
     {
 
         ScriptableObject target = this;
-        SerializedObject so = new SerializedObject(target);
-        SerializedProperty stringsProperty = so.FindProperty(fieldName);
+        SerializedObject thisObject = new SerializedObject(target);
+        SerializedProperty variableProperty = thisObject.FindProperty(fieldName);
 
-        EditorGUILayout.PropertyField(stringsProperty, true); // True means show children
-        so.ApplyModifiedProperties(); // Remember to apply modified properties
+        EditorGUILayout.PropertyField(variableProperty, true);
+        thisObject.ApplyModifiedProperties();
     }
 }
