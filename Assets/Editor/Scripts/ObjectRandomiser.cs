@@ -71,6 +71,10 @@ public class ObjectRandomiser : EditorWindow
             }
             if (GUILayout.Button("Close"))
             {
+                showRandomiseMaterials = false;
+                showRandomiseMesh = false;
+                showRandomisePosition = false;
+                showRandomiseRotation = false;
                 this.Close();
             }
         }
