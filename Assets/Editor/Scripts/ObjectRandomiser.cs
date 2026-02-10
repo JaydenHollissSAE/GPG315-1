@@ -11,7 +11,7 @@ public class ObjectRandomiser : EditorWindow
     [CanEditMultipleObjects]
     public static void ShowWindow()
     {
-        GetWindow<ObjectRandomiser>("Hello World");
+        GetWindow<ObjectRandomiser>("Object Randomiser Tool");
     }
     
     public Material[] randomMaterialsList;
@@ -49,9 +49,6 @@ public class ObjectRandomiser : EditorWindow
         }
         else
         {
-
-            GUILayout.Label("Hello World!", EditorStyles.boldLabel);
-
             if (GUILayout.Button("Randomise Materials"))
             {
                 showRandomiseMaterials = true;
