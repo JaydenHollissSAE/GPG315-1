@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class ObjectRandomiser : EditorWindow
 {
-    [MenuItem("ObjectRandomiser")]
+    [MenuItem("Object Tools/Object Randomiser")]
     [CanEditMultipleObjects]
     public static void ShowWindow()
     {
