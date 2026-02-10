@@ -71,7 +71,7 @@ public class ObjectRandomiser : EditorWindow
                         {
                             if (checkedIndexes.Count >= randomMeshList.Length)
                             {
-                                Debug.LogError("No valid meshes found in list.");
+                                Debug.LogError("No valid materials found in list.");
                                 break;
                             }
                             int materialIndex = Random.Range(0, randomMeshList.Length);
