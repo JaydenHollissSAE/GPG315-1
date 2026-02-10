@@ -18,7 +18,16 @@ public class ObjectRandomiser : EditorWindow
     public Mesh[] randomMeshList;
 
     bool showRandomiseMaterials = false; 
-    bool showRandomiseMesh = false; 
+    bool showRandomiseMesh = false;
+    bool showRandomisePosition = false;
+    bool showRandomiseRotation = false;
+
+    Vector3 startOfPositionArea = Vector3.zero;
+    Vector3 endOfPositionArea = Vector3.one;
+
+    Vector4 startOfRotationArea = Vector4.zero;
+    Vector4 endOfRotationArea = Vector4.one;
+
 
     void OnGUI()
     {
@@ -29,6 +38,14 @@ public class ObjectRandomiser : EditorWindow
         else if (showRandomiseMesh)
         {
             RandomiseMesh();
+        }
+        else if (showRandomisePosition)
+        {
+            RandomisePosition();
+        }
+        else if (showRandomiseRotation)
+        {
+            RandomiseRotation();
         }
         else
         {
@@ -43,6 +60,14 @@ public class ObjectRandomiser : EditorWindow
             if (GUILayout.Button("Randomise Mesh"))
             {
                 showRandomiseMesh = true;
+            }
+            if (GUILayout.Button("Randomise Position"))
+            {
+                showRandomisePosition = true;
+            }
+            if (GUILayout.Button("Randomise Rotation"))
+            {
+                showRandomiseRotation = true;
             }
             if (GUILayout.Button("Close"))
             {
@@ -160,7 +185,76 @@ public class ObjectRandomiser : EditorWindow
         SerializedObject thisObject = new SerializedObject(target);
         SerializedProperty variableProperty = thisObject.FindProperty(fieldName);
 
-        EditorGUILayout.PropertyField(variableProperty, true);
-        thisObject.ApplyModifiedProperties();
+        if (variableProperty != null) {
+
+            EditorGUILayout.PropertyField(variableProperty, true);
+            thisObject.ApplyModifiedProperties();
+        }
+    }
+
+    void RandomisePosition()
+    {
+        startOfPositionArea = EditorGUILayout.Vector3Field("Start of Area", startOfPositionArea);
+        endOfPositionArea = EditorGUILayout.Vector3Field("End of Area", endOfPositionArea);
+        if (GUILayout.Button("Randomise!"))
+        {
+            Debug.Log(startOfPositionArea);
+            Debug.Log(endOfPositionArea);
+            if (Selection.objects.Length > 0)
+            {
+                foreach (var thisobj in Selection.objects)
+                {
+                    Transform transform = thisobj.GetComponent<Transform>();
+                    if (transform != null)
+                    {
+                        transform.position = new Vector3(Random.Range(startOfPositionArea.x, endOfPositionArea.x), Random.Range(startOfPositionArea.y, endOfPositionArea.y), Random.Range(startOfPositionArea.z, endOfPositionArea.z));
+                    }
+                    else
+                    {
+                        Debug.LogError("[" + thisobj.name + "] Does not contain a transform component");
+                    }
+
+                    Debug.Log(thisobj.name);
+                }
+            }
+        }
+        if (GUILayout.Button("Return"))
+        {
+            showRandomisePosition = false;
+        }
+        return;
+    }
+
+    void RandomiseRotation()
+    {
+        startOfRotationArea = EditorGUILayout.Vector4Field("Start of Area", startOfRotationArea);
+        endOfRotationArea = EditorGUILayout.Vector4Field("End of Area", endOfRotationArea);
+        if (GUILayout.Button("Randomise!"))
+        {
+            Debug.Log(startOfPositionArea);
+            Debug.Log(endOfPositionArea);
+            if (Selection.objects.Length > 0)
+            {
+                foreach (var thisobj in Selection.objects)
+                {
+                    Transform transform = thisobj.GetComponent<Transform>();
+                    if (transform != null)
+                    {
+                        transform.rotation = new Quaternion(Random.Range(startOfRotationArea.x, endOfRotationArea.x), Random.Range(startOfRotationArea.y, endOfRotationArea.y), Random.Range(startOfRotationArea.z, endOfRotationArea.z), Random.Range(startOfRotationArea.w, endOfRotationArea.w));
+                    }
+                    else
+                    {
+                        Debug.LogError("[" + thisobj.name + "] Does not contain a transform component");
+                    }
+
+                    Debug.Log(thisobj.name);
+                }
+            }
+        }
+        if (GUILayout.Button("Return"))
+        {
+            showRandomiseRotation = false;
+        }
+        return;
     }
 }
