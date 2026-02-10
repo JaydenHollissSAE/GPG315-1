@@ -28,9 +28,12 @@ public class ObjectRandomiser : EditorWindow
     Vector4 startOfRotationArea = Vector4.zero;
     Vector4 endOfRotationArea = Vector4.one;
 
+    Vector2 scrollBar = Vector2.zero;
 
     void OnGUI()
     {
+        scrollBar = GUILayout.BeginScrollView(scrollBar);
+
         if (showRandomiseMaterials) 
         {
             RandomiseMaterials();
