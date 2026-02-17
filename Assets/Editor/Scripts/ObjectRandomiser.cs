@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Unity.VisualScripting;
 using UnityEditor;
+using UnityEditor.TerrainTools;
 using UnityEngine;
 
 public class ObjectRandomiser : EditorWindow
@@ -22,13 +23,35 @@ public class ObjectRandomiser : EditorWindow
     bool showRandomisePosition = false;
     bool showRandomiseRotation = false;
 
-    Vector3 startOfPositionArea = Vector3.zero;
-    Vector3 endOfPositionArea = Vector3.one;
+
+    Vector3 endOfPositionArea
+    {
+        set
+        {
+            endOfPositionAreaInternal = value;
+            RandomiserVisulisationTool.drawEndPos = value;
+            Debug.Log("Set Value");
+        }
+        get { return endOfPositionAreaInternal; }
+    }
+    Vector3 endOfPositionAreaInternal;
+    Vector3 startOfPositionArea
+    {
+        set
+        {
+            startOfPositionAreaInternal = value;
+            RandomiserVisulisationTool.drawStartPos = value;
+        }
+        get { return startOfPositionAreaInternal; }
+    }
+    Vector3 startOfPositionAreaInternal;
 
     Vector4 startOfRotationArea = Vector4.zero;
     Vector4 endOfRotationArea = Vector4.one;
 
     Vector2 scrollBar = Vector2.zero;
+
+    public static bool showVisulisation = false;
 
     void OnGUI()
     {
@@ -75,6 +98,7 @@ public class ObjectRandomiser : EditorWindow
                 showRandomiseMesh = false;
                 showRandomisePosition = false;
                 showRandomiseRotation = false;
+                showVisulisation = false;
                 this.Close();
             }
         }
@@ -198,8 +222,10 @@ public class ObjectRandomiser : EditorWindow
 
     void RandomisePosition()
     {
+        Handles.DrawDottedLine(startOfPositionArea, endOfPositionArea, 4);
         startOfPositionArea = EditorGUILayout.Vector3Field("Start of Area", startOfPositionArea);
         endOfPositionArea = EditorGUILayout.Vector3Field("End of Area", endOfPositionArea);
+        showVisulisation = true;
         if (GUILayout.Button("Randomise!"))
         {
             Debug.Log(startOfPositionArea);
@@ -225,6 +251,7 @@ public class ObjectRandomiser : EditorWindow
         if (GUILayout.Button("Return"))
         {
             showRandomisePosition = false;
+            showVisulisation = false;
         }
         return;
     }
@@ -233,6 +260,8 @@ public class ObjectRandomiser : EditorWindow
     {
         startOfRotationArea = EditorGUILayout.Vector4Field("Start of Area", startOfRotationArea);
         endOfRotationArea = EditorGUILayout.Vector4Field("End of Area", endOfRotationArea);
+        RandomiserVisulisationTool.drawStartPos = startOfRotationArea;
+        RandomiserVisulisationTool.drawEndPos = endOfRotationArea;
         if (GUILayout.Button("Randomise!"))
         {
             Debug.Log(startOfPositionArea);
@@ -262,3 +291,5 @@ public class ObjectRandomiser : EditorWindow
         return;
     }
 }
+
+
