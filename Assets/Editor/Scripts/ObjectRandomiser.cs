@@ -222,7 +222,7 @@ public class ObjectRandomiser : EditorWindow
 
     void RandomisePosition()
     {
-        Handles.DrawDottedLine(startOfPositionArea, endOfPositionArea, 4);
+        //Handles.DrawDottedLine(startOfPositionArea, endOfPositionArea, 4);
         startOfPositionArea = EditorGUILayout.Vector3Field("Start of Area", startOfPositionArea);
         endOfPositionArea = EditorGUILayout.Vector3Field("End of Area", endOfPositionArea);
         showVisulisation = true;
