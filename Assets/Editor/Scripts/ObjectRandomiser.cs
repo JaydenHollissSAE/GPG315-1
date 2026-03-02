@@ -30,7 +30,7 @@ public class ObjectRandomiser : EditorWindow
         {
             endOfPositionAreaInternal = value;
             RandomiserVisulisationTool.drawEndPos = value;
-            Debug.Log("Set Value");
+            //Debug.Log("Set Value");
         }
         get { return endOfPositionAreaInternal; }
     }
@@ -114,6 +114,7 @@ public class ObjectRandomiser : EditorWindow
         {
             if (Selection.objects.Length > 0)
             {
+                SetUndo("Material");
                 foreach (var thisobj in Selection.objects)
                 {
                     Renderer material = thisobj.GetComponent<Renderer>();
@@ -135,8 +136,10 @@ public class ObjectRandomiser : EditorWindow
                                 material.material = newMaterial;
                                 break;
                             }
-                            else Debug.LogError("Mesh at index [" + materialIndex + "] is empty.");
-
+                            else
+                            {
+                                Debug.LogError("Mesh at index [" + materialIndex + "] is empty.");
+                            }
                         }
                     }
                     else
@@ -144,7 +147,7 @@ public class ObjectRandomiser : EditorWindow
                         Debug.LogError("[" + thisobj.name + "] Does not contain a renderer component");
                     }
 
-                    Debug.Log(thisobj.name);
+                    //Debug.Log(thisobj.name);
                 }
 
             }
@@ -164,6 +167,7 @@ public class ObjectRandomiser : EditorWindow
         {
             if (Selection.objects.Length > 0)
             {
+                SetUndo("Mesh");
                 foreach (var thisobj in Selection.objects)
                 {
                     MeshFilter mesh = thisobj.GetComponent<MeshFilter>();
@@ -185,16 +189,19 @@ public class ObjectRandomiser : EditorWindow
                                 mesh.mesh = newMesh;
                                 break;
                             }
-                            else Debug.LogError("Mesh at index [" + meshIndex + "] is empty.");
+                            else
+                            {
+                                Debug.LogError("Mesh at index [" + meshIndex + "] is empty.");
+                            }
 
                         }
                     }
                     else
                     {
-                        Debug.LogError("[" + thisobj.name + "] Does not contain a renderer component");
+                        Debug.LogError("[" + thisobj.name + "] Does not contain a mesh component");
                     }
 
-                    Debug.Log(thisobj.name);
+                    //Debug.Log(thisobj.name);
                 }
 
             }
@@ -228,10 +235,11 @@ public class ObjectRandomiser : EditorWindow
         showVisulisation = true;
         if (GUILayout.Button("Randomise!"))
         {
-            Debug.Log(startOfPositionArea);
-            Debug.Log(endOfPositionArea);
+            //Debug.Log(startOfPositionArea);
+            //Debug.Log(endOfPositionArea);
             if (Selection.objects.Length > 0)
             {
+                SetUndo("Position");
                 foreach (var thisobj in Selection.objects)
                 {
                     Transform transform = thisobj.GetComponent<Transform>();
@@ -244,7 +252,7 @@ public class ObjectRandomiser : EditorWindow
                         Debug.LogError("[" + thisobj.name + "] Does not contain a transform component");
                     }
 
-                    Debug.Log(thisobj.name);
+                    //Debug.Log(thisobj.name);
                 }
             }
         }
@@ -264,10 +272,11 @@ public class ObjectRandomiser : EditorWindow
         RandomiserVisulisationTool.drawEndPos = endOfRotationArea;
         if (GUILayout.Button("Randomise!"))
         {
-            Debug.Log(startOfPositionArea);
-            Debug.Log(endOfPositionArea);
+            //Debug.Log(startOfPositionArea);
+            //Debug.Log(endOfPositionArea);
             if (Selection.objects.Length > 0)
             {
+                SetUndo("Rotation");
                 foreach (var thisobj in Selection.objects)
                 {
                     Transform transform = thisobj.GetComponent<Transform>();
@@ -280,7 +289,7 @@ public class ObjectRandomiser : EditorWindow
                         Debug.LogError("[" + thisobj.name + "] Does not contain a transform component");
                     }
 
-                    Debug.Log(thisobj.name);
+                    //Debug.Log(thisobj.name);
                 }
             }
         }
@@ -288,6 +297,34 @@ public class ObjectRandomiser : EditorWindow
         {
             showRandomiseRotation = false;
         }
+        return;
+    }
+
+    void SetUndo(string type)
+    {
+        foreach (GameObject obj in Selection.objects)
+        {
+            switch (type)
+            {
+                case "Rotation":
+                case "Position":
+
+                    Undo.RecordObject(obj.transform, type + " - Object Randomiser");
+                    break;
+                case "Mesh":
+                    Undo.RecordObject(obj.GetComponent<MeshFilter>(), type + " - Object Randomiser");
+                    break;
+
+                case "Material":
+                    Undo.RecordObject(obj.GetComponent<Renderer>(), type + " - Object Randomiser");
+                    break;
+
+            }
+
+        }
+
+        //Undo.RecordObjects(Selection.objects, type + " - Object Randomiser");
+        Debug.Log(type);
         return;
     }
 }
