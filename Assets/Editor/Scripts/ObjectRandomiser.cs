@@ -309,21 +309,21 @@ public class ObjectRandomiser : EditorWindow
                 case "Rotation":
                 case "Position":
 
-                    Undo.RecordObject(obj.transform, type + " - Object Randomiser");
+                    Undo.RecordObject(obj.transform, type + " - Object Randomiser Tool");
                     break;
                 case "Mesh":
-                    Undo.RecordObject(obj.GetComponent<MeshFilter>(), type + " - Object Randomiser");
+                    Undo.RecordObject(obj.GetComponent<MeshFilter>(), type + " - Object Randomiser Tool");
                     break;
 
                 case "Material":
-                    Undo.RecordObject(obj.GetComponent<Renderer>(), type + " - Object Randomiser");
+                    Undo.RecordObject(obj.GetComponent<Renderer>(), type + " - Object Randomiser Tool");
                     break;
 
             }
 
         }
 
-        //Undo.RecordObjects(Selection.objects, type + " - Object Randomiser");
+        //Undo.RecordObjects(Selection.objects, type + " - Object Randomiser Tool");
         Debug.Log(type);
         return;
     }
