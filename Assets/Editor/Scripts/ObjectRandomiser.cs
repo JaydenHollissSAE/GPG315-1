@@ -324,7 +324,7 @@ public class ObjectRandomiser : EditorWindow
         }
 
         //Undo.RecordObjects(Selection.objects, type + " - Object Randomiser Tool");
-        Debug.Log(type);
+        //Debug.Log(type);
         return;
     }
 }
