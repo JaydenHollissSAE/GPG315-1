@@ -75,24 +75,24 @@ public class ObjectRandomiser : EditorWindow
         }
         else
         {
-            if (GUILayout.Button("Randomise Materials"))
+            if (GUILayout.Button("Randomise Materials", GUILayout.Height(35)))
             {
                 showRandomiseMaterials = true;
             }
 
-            if (GUILayout.Button("Randomise Mesh"))
+            if (GUILayout.Button("Randomise Mesh", GUILayout.Height(35)))
             {
                 showRandomiseMesh = true;
             }
-            if (GUILayout.Button("Randomise Position"))
+            if (GUILayout.Button("Randomise Position", GUILayout.Height(35)))
             {
                 showRandomisePosition = true;
             }
-            if (GUILayout.Button("Randomise Rotation"))
+            if (GUILayout.Button("Randomise Rotation", GUILayout.Height(35)))
             {
                 showRandomiseRotation = true;
             }
-            if (GUILayout.Button("Close"))
+            if (GUILayout.Button("Close", GUILayout.Height(20)))
             {
                 showRandomiseMaterials = false;
                 showRandomiseMesh = false;
@@ -110,7 +110,7 @@ public class ObjectRandomiser : EditorWindow
 
         DisplayList("randomMaterialsList");
 
-        if (GUILayout.Button("Randomise!"))
+        if (GUILayout.Button("Randomise!", GUILayout.Height(35)))
         {
             if (Selection.objects.Length > 0)
             {
@@ -152,7 +152,7 @@ public class ObjectRandomiser : EditorWindow
 
             }
         }
-        if (GUILayout.Button("Return"))
+        if (GUILayout.Button("Return", GUILayout.Height(20)))
         {
             showRandomiseMaterials = false;
         }
@@ -163,7 +163,7 @@ public class ObjectRandomiser : EditorWindow
     {
         DisplayList("randomMeshList");
 
-        if (GUILayout.Button("Randomise!"))
+        if (GUILayout.Button("Randomise!", GUILayout.Height(35)))
         {
             if (Selection.objects.Length > 0)
             {
@@ -206,7 +206,7 @@ public class ObjectRandomiser : EditorWindow
 
             }
         }
-        if (GUILayout.Button("Return"))
+        if (GUILayout.Button("Return", GUILayout.Height(20)))
         {
             showRandomiseMesh = false;
         }
@@ -233,7 +233,7 @@ public class ObjectRandomiser : EditorWindow
         startOfPositionArea = EditorGUILayout.Vector3Field("Start of Area", startOfPositionArea);
         endOfPositionArea = EditorGUILayout.Vector3Field("End of Area", endOfPositionArea);
         showVisulisation = true;
-        if (GUILayout.Button("Randomise!"))
+        if (GUILayout.Button("Randomise!", GUILayout.Height(35)))
         {
             //Debug.Log(startOfPositionArea);
             //Debug.Log(endOfPositionArea);
@@ -256,7 +256,7 @@ public class ObjectRandomiser : EditorWindow
                 }
             }
         }
-        if (GUILayout.Button("Return"))
+        if (GUILayout.Button("Return", GUILayout.Height(20)))
         {
             showRandomisePosition = false;
             showVisulisation = false;
@@ -270,7 +270,7 @@ public class ObjectRandomiser : EditorWindow
         endOfRotationArea = EditorGUILayout.Vector4Field("End of Area", endOfRotationArea);
         RandomiserVisulisationTool.drawStartPos = startOfRotationArea;
         RandomiserVisulisationTool.drawEndPos = endOfRotationArea;
-        if (GUILayout.Button("Randomise!"))
+        if (GUILayout.Button("Randomise!", GUILayout.Height(35)))
         {
             //Debug.Log(startOfPositionArea);
             //Debug.Log(endOfPositionArea);
@@ -293,7 +293,7 @@ public class ObjectRandomiser : EditorWindow
                 }
             }
         }
-        if (GUILayout.Button("Return"))
+        if (GUILayout.Button("Return", GUILayout.Height(20)))
         {
             showRandomiseRotation = false;
         }
