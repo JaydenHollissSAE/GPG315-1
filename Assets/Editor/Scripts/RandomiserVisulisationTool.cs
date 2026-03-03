@@ -2,6 +2,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem.OnScreen;
 
+[CanEditMultipleObjects]
 [CustomEditor(typeof(Transform))]
 public class RandomiserVisulisationTool : Editor
 {
